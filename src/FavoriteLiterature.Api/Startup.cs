@@ -1,3 +1,4 @@
+using FavoriteLiterature.Api.Entities;
 using FavoriteLiterature.Api.Infrastructure;
 using FavoriteLiterature.Api.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,8 @@ public class Startup
         
         services
             .AddDbContext<DataContext>(options => options.UseNpgsql(connectionString))
-            .AddScoped<IDataContext, DataContext>();
+            .AddScoped<IDataContext, DataContext>()
+            .AddScoped<IRepository<User>, Repository<User>>();
     }
         
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
