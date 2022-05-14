@@ -6,6 +6,8 @@ namespace FavoriteLiterature.Api.Infrastructure;
 
 public class DataContext : DbContext, IDataContext
 {
+    #region DbSet
+    
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Author> Authors { get; set; }
@@ -14,6 +16,8 @@ public class DataContext : DbContext, IDataContext
     public DbSet<CriticOpinion> Opinions { get; set; }
     public DbSet<Document> Documents { get; set; }
     public DbSet<Status> Statuses { get; set; }
+    
+    #endregion
 
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {

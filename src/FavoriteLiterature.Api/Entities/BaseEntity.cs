@@ -2,12 +2,15 @@
 
 public abstract class BaseEntity
 {
-    protected BaseEntity()
-    {
-        Created = DateTimeOffset.UtcNow;
-    }
+    public Guid Id { get; private set; }
 
     public DateTimeOffset Created { get; private set; }
 
     public DateTimeOffset? Updated { get; protected set; }
+    
+    protected BaseEntity()
+    {
+        Id = Guid.Empty;
+        Created = DateTimeOffset.UtcNow;
+    }
 }

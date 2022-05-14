@@ -9,8 +9,6 @@ public class BookConfiguration : BaseEntityConfiguration<Book>
     public override void Configure(EntityTypeBuilder<Book> builder)
     {
         builder.ToTable("Books"); // TPT (Table Per Type)
-        
-        builder.HasKey(book => book.Id);
 
         builder
             .Property(book => book.Name)

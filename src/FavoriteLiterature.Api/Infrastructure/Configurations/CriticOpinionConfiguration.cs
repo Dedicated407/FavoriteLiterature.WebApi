@@ -9,8 +9,6 @@ public class CriticOpinionConfiguration : BaseEntityConfiguration<CriticOpinion>
     public override void Configure(EntityTypeBuilder<CriticOpinion> builder)
     {
         builder.ToTable("CriticOpinions"); // TPT (Table Per Type)
-        
-        builder.HasKey(opinion => opinion.Id);
 
         builder
             .HasOne(opinion => opinion.Critic)
