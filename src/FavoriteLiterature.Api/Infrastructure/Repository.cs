@@ -1,5 +1,8 @@
 ﻿using FavoriteLiterature.Api.Entities;
+using FavoriteLiterature.Api.Entities.Enums;
 using FavoriteLiterature.Api.Infrastructure.Interfaces;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace FavoriteLiterature.Api.Infrastructure;
 
@@ -12,11 +15,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         _context = context;
     }
     
-    public Guid Create(TEntity entity)
+    public async Task<Unit> Create(TEntity entity, CancellationToken cancellationToken)
     {
-        _context.Set<TEntity>().Add(entity);
-        _context.SaveChanges();
-        return entity.Id;
+        await _context.Set<TEntity>().AddAsync(entity, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+        return Unit.Value;
     }
 
     public TEntity? Get(Guid id)
@@ -46,5 +49,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     public IQueryable<TEntity> GetAll()
     {
         return _context.Set<TEntity>().AsQueryable();
+    }
+
+    public async Task<Role> FindRole(int id)
+    {
+        return await _context.Roles.FirstOrDefaultAsync(role => role.Id == id) ?? throw new InvalidOperationException();
     }
 }

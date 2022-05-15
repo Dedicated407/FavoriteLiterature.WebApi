@@ -11,16 +11,12 @@ public class User : BaseEntity
     public string? LastName { get; set; }
     public string? Patronymic { get; set; }
 
-    public User(string userName, string email, string passwordHash, int roleId, 
-        string? firstName = null, string? lastName = null, string? patronymic = null)
+    public User(string userName, string email, string passwordHash, int roleId)
     {
         UserName = userName;
         Email = email;
         PasswordHash = passwordHash;
         RoleId = roleId;
-        FirstName = firstName;
-        LastName = lastName;
-        Patronymic = patronymic;
     }
 
     public Critic? Critic { get; set; }
