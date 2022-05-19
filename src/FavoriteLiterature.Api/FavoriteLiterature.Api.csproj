@@ -8,6 +8,11 @@
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
       <DocumentationFile>bin\Debug\FavoriteLiterature.Api.xml</DocumentationFile>
+      <NoWarn>CS1591;CS8618</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <NoWarn>CS1591;CS8618</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>

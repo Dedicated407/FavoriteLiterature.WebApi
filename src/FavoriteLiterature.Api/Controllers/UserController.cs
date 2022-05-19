@@ -1,11 +1,17 @@
 ﻿using FavoriteLiterature.Api.Entities.Requests.Users.JwtToken;
 using FavoriteLiterature.Api.Entities.Requests.Users.Register;
+using FavoriteLiterature.Client.Models.Users;
+using FavoriteLiterature.Client.Models.Users.JwtToken;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FavoriteLiterature.Api.Controllers;
 
+/// <summary>
+/// Класс <see cref="UserController"/>.
+/// Контроллер, предназначенный для работы с пользователем. 
+/// </summary>
 [Authorize]
 [ApiController]
 [Route("api/users")]
@@ -19,7 +25,13 @@ public class UserController : ControllerBase
     }
     
     /// <summary>
-    /// Регистрация пользователя в системе
+    /// Регистрация пользователя в системе.
+    /// <param name="request">
+    /// Необходимые поля для регистрации указаны в <see cref="RegisterRequestModel"/>.
+    /// </param>
+    /// <exception cref="ArgumentException">
+    /// Выбрасывается ошибка, когда пользователь с таким <see cref="RegisterRequestModel.Email"/> уже существует.
+    /// </exception>
     /// </summary>
     [AllowAnonymous]
     [HttpPost("register")]
@@ -27,7 +39,11 @@ public class UserController : ControllerBase
         Ok(await _mediator.Send(request));
     
     /// <summary>
-    /// Получение JWT токена
+    /// Получение JWT токена.
+    /// <param name="request">
+    /// Необходимо ввести <see cref="JwtTokenRequestModel.Email"/>
+    /// и <see cref="JwtTokenRequestModel.Password"/>.
+    /// </param>
     /// </summary>
     [AllowAnonymous]
     [HttpPost("token")]
