@@ -1,4 +1,6 @@
-﻿namespace FavoriteLiterature.Api.Entities;
+﻿using FavoriteLiterature.Api.Entities.Enums;
+
+namespace FavoriteLiterature.Api.Entities;
 
 public class User : BaseEntity
 {
@@ -17,6 +19,7 @@ public class User : BaseEntity
         Email = email;
         PasswordHash = passwordHash;
         RoleId = roleId;
+        Role = new Role(roleId, Enum.GetName(typeof(Roles), roleId));
     }
 
     public Critic? Critic { get; set; }
