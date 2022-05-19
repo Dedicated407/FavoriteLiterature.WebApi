@@ -27,7 +27,7 @@ public class UserController : ControllerBase
         Ok(await _mediator.Send(request));
     
     /// <summary>
-    /// Получение jwt токена
+    /// Получение JWT токена
     /// </summary>
     [AllowAnonymous]
     [HttpPost("token")]

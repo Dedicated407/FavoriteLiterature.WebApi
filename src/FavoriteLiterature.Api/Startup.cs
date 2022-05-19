@@ -51,8 +51,43 @@ public class Startup
         {
             options.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "FavLit API", Version = "v1"
+                Version = "v1",
+                Title = "FavLit API", 
+                Description = "FavLit Open API. " +
+                              "A service for working with beginners writers who want to get an initial audience.",
+                Contact = new OpenApiContact
+                {
+                    Name = "Tsypin I.P.",
+                    Email = "tsypin.i.p@mail.ru",
+                    Url = new Uri("https://t.me/Dedicated407"),
+                },
             });
+            
+            options.AddSecurityDefinition("Bearer", 
+                new OpenApiSecurityScheme { 
+                    In = ParameterLocation.Header,
+                    Description = "Please enter into field the word 'Bearer' following by space and JWT", 
+                    Name = "Authorization", 
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement 
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Id = "Bearer",
+                            Type = ReferenceType.SecurityScheme,
+                        }
+                    },
+                    new string[] { }
+                }
+            });
+
+            var filePath = Path.Combine(AppContext.BaseDirectory, "FavoriteLiterature.Api.xml");
+            options.IncludeXmlComments(filePath);
         });
 
         services.AddMediatR(typeof(Startup));
@@ -70,6 +105,7 @@ public class Startup
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            app.UseExceptionHandler("/api/error");
         }
         
         app.UseSwagger();
@@ -77,6 +113,9 @@ public class Startup
         app.UseStatusCodePages();
         
         app.UseRouting();
+        
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
