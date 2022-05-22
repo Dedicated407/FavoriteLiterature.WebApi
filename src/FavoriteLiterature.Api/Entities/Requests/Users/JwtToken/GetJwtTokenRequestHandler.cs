@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FavoriteLiterature.Api.Entities.Enums;
 using FavoriteLiterature.Api.Infrastructure.Interfaces;
 using FavoriteLiterature.Api.Options;
 using FavoriteLiterature.Client.Models.Users.JwtToken;
@@ -14,10 +15,10 @@ namespace FavoriteLiterature.Api.Entities.Requests.Users.JwtToken;
 
 public class GetJwtTokenRequestHandler : IRequestHandler<GetJwtTokenRequest, JwtTokenResponseModel>
 {
-    private readonly IRepository<User> _repository;
+    private readonly IRepository _repository;
     private readonly JwtOptions _jwtOptions;
     
-    public GetJwtTokenRequestHandler(IRepository<User> repository, IOptions<JwtOptions> jwtOptions)
+    public GetJwtTokenRequestHandler(IRepository repository, IOptions<JwtOptions> jwtOptions)
     {
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         _jwtOptions = jwtOptions.Value;
@@ -25,7 +26,7 @@ public class GetJwtTokenRequestHandler : IRequestHandler<GetJwtTokenRequest, Jwt
     
     public async Task<JwtTokenResponseModel> Handle(GetJwtTokenRequest request, CancellationToken cancellationToken)
     { 
-        var user = await _repository.GetAll().FirstOrDefaultAsync(user => 
+        var user = await _repository.Users.FirstOrDefaultAsync(user => 
             user.Email == request.Email,
             cancellationToken);
 
@@ -38,7 +39,6 @@ public class GetJwtTokenRequestHandler : IRequestHandler<GetJwtTokenRequest, Jwt
         {
             new (ClaimTypes.Email, user.Email),
             new (ClaimTypes.Name, user.UserName),
-            new (ClaimTypes.Role, user.Role.Name),
         };
 
         var jwtToken = new JwtSecurityToken(

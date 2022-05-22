@@ -7,8 +7,8 @@ public class User : BaseEntity
     public string UserName { get; private set; }
     public string Email { get; private set; }
     public string PasswordHash { get; private set; }
-    public int RoleId { get; private set; } // внешний ключ
-    public Role Role { get; private set; } // навигационное свойство
+    public int RoleId { get; set; } // внешний ключ
+    public Role Role { get; set; } // навигационное свойство
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? Patronymic { get; set; }
@@ -19,7 +19,6 @@ public class User : BaseEntity
         Email = email;
         PasswordHash = passwordHash;
         RoleId = roleId;
-        Role = new Role(roleId, Enum.GetName(typeof(Roles), roleId));
     }
 
     public Critic? Critic { get; set; }

@@ -5,12 +5,12 @@ namespace FavoriteLiterature.Api.Infrastructure.Interfaces;
 
 public interface IDataContext
 {
-    DbSet<Role> Roles { get; set; }
-    DbSet<User> Users { get; set; }
-    DbSet<Author> Authors { get; set; }
-    DbSet<Book> Books { get; set; }
-    DbSet<Critic> Critics { get; set; }
-    DbSet<CriticOpinion> Opinions { get; set; }
-    DbSet<Document> Documents { get; set; }
-    DbSet<Status> Statuses { get; set; }
+    DbSet<Role> DbRoles { get; set; }
+    DbSet<User> DbUsers { get; set; }
+    DbSet<Author> DbAuthors { get; set; }
+    DbSet<Book> DbBooks { get; set; }
+    DbSet<Critic> DbCritics { get; set; }
+    DbSet<CriticOpinion> DbOpinions { get; set; }
+    DbSet<Document> DbDocuments { get; set; }
+    DbSet<Status> DbStatuses { get; set; }
 }

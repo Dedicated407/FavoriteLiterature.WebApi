@@ -1,5 +1,4 @@
 using System.Text;
-using FavoriteLiterature.Api.Entities;
 using FavoriteLiterature.Api.Infrastructure;
 using FavoriteLiterature.Api.Infrastructure.Interfaces;
 using FavoriteLiterature.Api.Options;
@@ -95,8 +94,7 @@ public class Startup
         
         services
             .AddDbContext<DataContext>(options => options.UseNpgsql(connectionString))
-            .AddScoped<IDataContext, DataContext>()
-            .AddScoped<IRepository<User>, Repository<User>>()
+            .AddScoped<IRepository, DataContext>()
             .Configure<JwtOptions>(_configuration.GetSection(nameof(JwtOptions)).Bind);
     }
         

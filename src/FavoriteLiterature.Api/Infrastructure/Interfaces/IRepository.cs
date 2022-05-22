@@ -1,13 +1,10 @@
 ﻿using FavoriteLiterature.Api.Entities;
-using MediatR;
 
 namespace FavoriteLiterature.Api.Infrastructure.Interfaces;
 
-public interface IRepository<TEntity> where TEntity : BaseEntity
+public interface IRepository
 {
-    public Task<Unit> Create(TEntity entity, CancellationToken cancellationToken);
-    public TEntity? Get(Guid id);
-    public Guid Update(TEntity entity);
-    public void Delete(Guid id);
-    public IQueryable<TEntity> GetAll();
+    public IQueryable<User> Users { get; }
+    public IQueryable<Author> Authors { get; }
+    public Task Create<TEntity>(TEntity entity, CancellationToken cancellationToken) where TEntity : class;
 }
