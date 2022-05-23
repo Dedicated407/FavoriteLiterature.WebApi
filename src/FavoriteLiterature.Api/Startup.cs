@@ -1,9 +1,12 @@
 using System.Text;
+using FavoriteLiterature.Api.Entities.Enums;
 using FavoriteLiterature.Api.Infrastructure;
 using FavoriteLiterature.Api.Infrastructure.Interfaces;
 using FavoriteLiterature.Api.Options;
+using FavoriteLiterature.Api.Policies;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -45,6 +48,15 @@ public class Startup
                     ValidateLifetime = false,
                 };
             });
+
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy(nameof(Roles.Author), policy =>
+                policy.Requirements.Add(new MinimumRoleRequirement(Roles.Author)));
+            
+            options.AddPolicy(nameof(Roles.Critic), policy =>
+                policy.Requirements.Add(new MinimumRoleRequirement(Roles.Critic)));
+        });
 
         services.AddSwaggerGen(options =>
         {
@@ -95,7 +107,8 @@ public class Startup
         services
             .AddDbContext<DataContext>(options => options.UseNpgsql(connectionString))
             .AddScoped<IRepository, DataContext>()
-            .Configure<JwtOptions>(_configuration.GetSection(nameof(JwtOptions)).Bind);
+            .Configure<JwtOptions>(_configuration.GetSection(nameof(JwtOptions)).Bind)
+            .AddSingleton<IAuthorizationHandler, MinimumRoleRequirementHandler>();
     }
         
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
