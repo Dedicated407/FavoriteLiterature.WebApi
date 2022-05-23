@@ -1,10 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FavoriteLiterature.Api.Entities.Requests.Authors;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FavoriteLiterature.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/authors")]
 public class AuthorController : ControllerBase
 {
-    public AuthorController() { }
+    private readonly IMediator _mediator;
+
+    public AuthorController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    /// <summary>
+    /// Добавление автора в репозиторий.
+    /// </summary>
+    [HttpPost]
+    public async Task<IActionResult> Add([FromBody] AddAuthorRequest request) =>
+        Ok(await _mediator.Send(request));
 }
