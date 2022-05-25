@@ -4,6 +4,7 @@ using FavoriteLiterature.Api.Infrastructure;
 using FavoriteLiterature.Api.Infrastructure.Interfaces;
 using FavoriteLiterature.Api.Options;
 using FavoriteLiterature.Api.Policies;
+using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -113,7 +114,11 @@ public class Startup
         });
 
         services.AddMediatR(typeof(Startup));
-        services.AddControllers();
+        services.AddControllers().AddFluentValidation(configuration =>
+        {
+            configuration.RegisterValidatorsFromAssemblyContaining<Startup>();
+            configuration.LocalizationEnabled = true;
+        });
         
         services
             .AddDbContext<DataContext>(options => options.UseNpgsql(connectionString))
