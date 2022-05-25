@@ -39,6 +39,7 @@ public class GetJwtTokenRequestHandler : IRequestHandler<GetJwtTokenRequest, Jwt
         {
             new (ClaimTypes.Email, user.Email),
             new (ClaimTypes.Name, user.UserName),
+            new (ClaimTypes.Role, ((Roles) user.RoleId).ToString()),
         };
 
         var jwtToken = new JwtSecurityToken(

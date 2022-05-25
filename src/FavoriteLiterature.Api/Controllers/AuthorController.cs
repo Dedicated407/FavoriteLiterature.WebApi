@@ -1,11 +1,11 @@
-﻿using FavoriteLiterature.Api.Entities.Requests.Authors;
+﻿using FavoriteLiterature.Api.Entities.Enums;
+using FavoriteLiterature.Api.Entities.Requests.Authors;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FavoriteLiterature.Api.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("api/authors")]
 public class AuthorController : ControllerBase
@@ -21,6 +21,7 @@ public class AuthorController : ControllerBase
     /// Добавление автора в репозиторий.
     /// </summary>
     [HttpPost]
+    [Authorize(Policy = nameof(Roles.Critic))]
     public async Task<IActionResult> Add([FromBody] AddAuthorRequest request) =>
         Ok(await _mediator.Send(request));
 }
