@@ -25,6 +25,7 @@ public class DataContext : DbContext, IDataContext, IRepository
 
     public IQueryable<User> Users => DbUsers;
     public IQueryable<Author> Authors => DbAuthors;
+    public IQueryable<Book> Books => DbBooks;
     
     public async Task Create<TEntity>(TEntity entity, CancellationToken cancellationToken) where TEntity : class
     {   

@@ -1,3 +1,4 @@
+using FavoriteLiterature.Api.Entities;
 using FavoriteLiterature.Api.Entities.Enums;
 using FavoriteLiterature.Api.Entities.Requests.Books;
 using MediatR;
@@ -26,5 +27,13 @@ public class BookController : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> Add([FromBody] AddBookRequest request) =>
+        Ok(await _mediator.Send(request));
+    
+    /// <summary>
+    /// Получение списка книг
+    /// </summary>
+    [HttpGet]
+    [ProducesResponseType(typeof(Book), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetList([FromQuery] GetBooksListRequest request) =>
         Ok(await _mediator.Send(request));
 }
