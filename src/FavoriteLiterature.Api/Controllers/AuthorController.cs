@@ -1,4 +1,5 @@
-﻿using FavoriteLiterature.Api.Entities.Enums;
+﻿using FavoriteLiterature.Api.Entities;
+using FavoriteLiterature.Api.Entities.Enums;
 using FavoriteLiterature.Api.Entities.Requests.Authors;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -26,4 +27,13 @@ public class AuthorController : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Add([FromBody] AddAuthorRequest request) =>
         Ok(await _mediator.Send(request));
+    
+    /// <summary>
+    /// Получение списка авторов
+    /// </summary>
+    [HttpGet]
+    [ProducesResponseType(typeof(Author), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetList([FromQuery] GetAuthorsListRequest request) =>
+        Ok(await _mediator.Send(request));
+    
 }

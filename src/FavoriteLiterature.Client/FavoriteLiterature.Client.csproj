@@ -14,8 +14,4 @@
       <NoWarn>CS1591;CS8618</NoWarn>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Models\Author" />
-    </ItemGroup>
-
 </Project>
