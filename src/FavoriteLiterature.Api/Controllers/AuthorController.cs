@@ -22,6 +22,8 @@ public class AuthorController : ControllerBase
     /// </summary>
     [HttpPost]
     [Authorize(Policy = nameof(Roles.Critic))]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Add([FromBody] AddAuthorRequest request) =>
         Ok(await _mediator.Send(request));
 }

@@ -4,9 +4,11 @@ using FavoriteLiterature.Api.Infrastructure;
 using FavoriteLiterature.Api.Infrastructure.Interfaces;
 using FavoriteLiterature.Api.Options;
 using FavoriteLiterature.Api.Policies;
+using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -58,6 +60,15 @@ public class Startup
                 policy.Requirements.Add(new MinimumRoleRequirement(Roles.Critic)));
         });
 
+        services.AddProblemDetails(options =>
+        {
+            options.Map<ArgumentException>(exception => new ProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Title = exception.Message,
+            });
+        });
+        
         services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo
@@ -113,16 +124,12 @@ public class Startup
         
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseExceptionHandler("/api/error");
-        }
+        app.UseProblemDetails();
         
         app.UseSwagger();
         app.UseSwaggerUI();
         app.UseStatusCodePages();
-        
+
         app.UseRouting();
         
         app.UseAuthentication();

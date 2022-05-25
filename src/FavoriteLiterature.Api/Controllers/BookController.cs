@@ -22,6 +22,9 @@ public class BookController : ControllerBase
     /// </summary>
     [HttpPost]
     [Authorize(Policy = nameof(Roles.Author))]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> Add([FromBody] AddBookRequest request) =>
         Ok(await _mediator.Send(request));
 }
