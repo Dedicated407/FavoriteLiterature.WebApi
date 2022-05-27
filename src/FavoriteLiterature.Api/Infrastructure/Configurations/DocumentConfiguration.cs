@@ -10,8 +10,6 @@ public class DocumentConfiguration : BaseEntityConfiguration<Document>
     {
         builder.ToTable("Documents"); // TPT (Table Per Type)
 
-        builder.HasKey(doc => doc.Id);
-        
         builder
             .Property(doc => doc.Name)
             .IsRequired();

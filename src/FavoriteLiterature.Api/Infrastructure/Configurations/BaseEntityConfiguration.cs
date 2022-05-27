@@ -8,6 +8,8 @@ public abstract class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguratio
 {
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
+        builder.HasKey(x => x.Id);
+        
         builder
             .Property(x => x.Created)
             .HasDefaultValueSql("current_timestamp");

@@ -2,7 +2,7 @@
 
 public class Status
 {
-    public byte Id { get; private set; }
+    public int Id { get; private set; }
     public string Name { get; private set; }
     public string? Description { get; set; }
 
@@ -10,5 +10,9 @@ public class Status
     {
         Name = name;
         Description = description;
+    }
+
+    public Status()
+    {
     }
 }

@@ -10,8 +10,6 @@ public class UserConfiguration : BaseEntityConfiguration<User>
     {
         builder.ToTable("Users"); // TPT (Table Per Type)
 
-        builder.HasKey(user => user.Id);
-        
         builder
             .Property(user => user.Email)
             .IsRequired();
