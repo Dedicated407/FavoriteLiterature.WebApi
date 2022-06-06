@@ -3,6 +3,6 @@ using MediatR;
 
 namespace FavoriteLiterature.Api.Entities.Requests.Authors;
 
-public class GetAuthorsListRequest : GetAuthorsListRequestModel, IRequest<List<Author>>
+public class GetAuthorsListRequest : GetAuthorsListRequestModel, IRequest<ICollection<AuthorModel>>
 {
 }

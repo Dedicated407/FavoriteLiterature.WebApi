@@ -113,7 +113,9 @@ public class Startup
             options.IncludeXmlComments(filePath);
         });
 
-        services.AddMediatR(typeof(Startup));
+        services
+            .AddMediatR(typeof(Startup))
+            .AddAutoMapper(typeof(Startup));
         services.AddControllers().AddFluentValidation(configuration =>
         {
             configuration.RegisterValidatorsFromAssemblyContaining<Startup>();
