@@ -1,6 +1,7 @@
 using FavoriteLiterature.Api.Entities;
 using FavoriteLiterature.Api.Entities.Enums;
 using FavoriteLiterature.Api.Entities.Requests.Books;
+using FavoriteLiterature.Client.Models.Books;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,4 +37,14 @@ public class BookController : ControllerBase
     [ProducesResponseType(typeof(Book), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetList([FromQuery] GetBooksListRequest request) =>
         Ok(await _mediator.Send(request));
+    
+    /// <summary>
+    /// Получение информации о книге по Id
+    /// </summary>
+    [HttpGet("book")]
+    [ProducesResponseType(typeof(BookModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetBook([FromQuery] Guid id)
+    {
+        return Ok(await _mediator.Send(new GetBookRequest(id)));
+    }
 }

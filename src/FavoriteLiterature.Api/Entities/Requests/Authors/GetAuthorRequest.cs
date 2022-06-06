@@ -3,6 +3,4 @@ using MediatR;
 
 namespace FavoriteLiterature.Api.Entities.Requests.Authors;
 
-public class GetAuthorsListRequest : GetAuthorsListRequestModel, IRequest<ICollection<AuthorModel>>
-{
-}
+public record GetAuthorRequest(Guid Id) : IRequest<AuthorProfileModel>;

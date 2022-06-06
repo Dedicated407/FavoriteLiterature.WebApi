@@ -1,5 +1,8 @@
-﻿using FavoriteLiterature.Api.Entities.Requests.Users.JwtToken;
+﻿using System.Security.Claims;
+using FavoriteLiterature.Api.Entities.Requests.Users.JwtToken;
+using FavoriteLiterature.Api.Entities.Requests.Users.Profile;
 using FavoriteLiterature.Api.Entities.Requests.Users.Register;
+using FavoriteLiterature.Client.Models.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,4 +44,15 @@ public class UserController : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetJwtToken([FromBody] GetJwtTokenRequest request) => 
         Ok(await _mediator.Send(request));
+    
+    /// <summary>
+    /// Получение информации о пользователе по токену
+    /// </summary>
+    [HttpGet("current")]
+    [ProducesResponseType(typeof(UserProfileModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetProfile()
+    {
+        var userId = User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
+        return Ok(await _mediator.Send(new GetUserProfileRequest(Guid.Parse(userId))));
+    }
 }

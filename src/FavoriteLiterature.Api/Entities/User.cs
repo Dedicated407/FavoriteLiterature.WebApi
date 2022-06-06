@@ -1,6 +1,4 @@
-﻿using FavoriteLiterature.Api.Entities.Enums;
-
-namespace FavoriteLiterature.Api.Entities;
+﻿namespace FavoriteLiterature.Api.Entities;
 
 public class User : BaseEntity
 {

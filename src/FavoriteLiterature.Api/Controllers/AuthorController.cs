@@ -1,6 +1,7 @@
 ﻿using FavoriteLiterature.Api.Entities;
 using FavoriteLiterature.Api.Entities.Enums;
 using FavoriteLiterature.Api.Entities.Requests.Authors;
+using FavoriteLiterature.Client.Models.Authors;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,5 +36,13 @@ public class AuthorController : ControllerBase
     [ProducesResponseType(typeof(Author), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetList([FromQuery] GetAuthorsListRequest request) =>
         Ok(await _mediator.Send(request));
+    
+    /// <summary>
+    /// Получение профиля автора по Id
+    /// </summary>
+    [HttpGet("author")]
+    [ProducesResponseType(typeof(AuthorProfileModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAuthorProfile([FromQuery] Guid id) =>
+        Ok(await _mediator.Send(new GetAuthorRequest(id)));
     
 }
