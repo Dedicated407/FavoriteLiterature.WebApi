@@ -23,9 +23,14 @@ public class DataContext : DbContext, IDataContext, IRepository
     
     #endregion
 
+    #region IQueryable
+
     public IQueryable<User> Users => DbUsers;
     public IQueryable<Author> Authors => DbAuthors;
     public IQueryable<Book> Books => DbBooks;
+    public IQueryable<Role> Roles => DbRoles;
+
+    #endregion
     
     public async Task Create<TEntity>(TEntity entity, CancellationToken cancellationToken) where TEntity : class
     {   
