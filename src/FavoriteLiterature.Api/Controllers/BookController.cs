@@ -43,7 +43,7 @@ public class BookController : ControllerBase
     /// </summary>
     [HttpGet("book")]
     [ProducesResponseType(typeof(BookModel), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetProfile([FromQuery] Guid id)
+    public async Task<IActionResult> GetBook([FromQuery] Guid id)
     {
         return Ok(await _mediator.Send(new GetBookRequest(id)));
     }
