@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FavoriteLiterature.Api", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FavoriteLiterature.Client", "src\FavoriteLiterature.Client\FavoriteLiterature.Client.csproj", "{29C3BB6B-8974-4DED-AFFB-A617827FA626}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FavoriteLiterature.Tests", "src\FavoriteLiterature.Tests\FavoriteLiterature.Tests.csproj", "{E43BCE4C-8D62-4136-A65D-F2313D682F5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,9 +27,14 @@ Global
 		{29C3BB6B-8974-4DED-AFFB-A617827FA626}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29C3BB6B-8974-4DED-AFFB-A617827FA626}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29C3BB6B-8974-4DED-AFFB-A617827FA626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E43BCE4C-8D62-4136-A65D-F2313D682F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E43BCE4C-8D62-4136-A65D-F2313D682F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E43BCE4C-8D62-4136-A65D-F2313D682F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E43BCE4C-8D62-4136-A65D-F2313D682F5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{351A97E7-A521-4C07-86BF-D87785305590} = {527D910D-90AB-4EAB-B79E-882CEAC87CC3}
 		{29C3BB6B-8974-4DED-AFFB-A617827FA626} = {527D910D-90AB-4EAB-B79E-882CEAC87CC3}
+		{E43BCE4C-8D62-4136-A65D-F2313D682F5B} = {527D910D-90AB-4EAB-B79E-882CEAC87CC3}
 	EndGlobalSection
 EndGlobal
