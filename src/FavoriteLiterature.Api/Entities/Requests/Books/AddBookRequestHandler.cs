@@ -23,7 +23,7 @@ public class AddBookRequestHandler : IRequestHandler<AddBookRequest>
             .FirstOrDefaultAsync(author => author.UserId == user.Id, cancellationToken) 
                     ?? throw new ArgumentException(nameof(author));
 
-        Book book = new Book(request.Name, author.Id, request.Description);
+        Book book = new Book(request.Name, author.Id, request.Rating, request.Description);
         
         await _repository.Create(book, cancellationToken);
 

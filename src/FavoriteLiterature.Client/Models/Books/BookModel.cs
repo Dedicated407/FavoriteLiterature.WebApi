@@ -10,5 +10,7 @@ public class BookModel
     
     public AuthorModel Author { get; set; }
     
+    public byte Rating { get; set; }
+    
     public string? Description { get; set; }
 }
