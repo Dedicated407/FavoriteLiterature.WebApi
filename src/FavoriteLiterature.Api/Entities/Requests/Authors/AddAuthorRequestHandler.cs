@@ -20,7 +20,7 @@ public class AddAuthorRequestHandler : IRequestHandler<AddAuthorRequest>
                     ?? throw new ArgumentException(nameof(user));
 
         Author author = new Author(user.Id, request.Description, 
-            request.Birthday, request.PhoneNumber, request.Address, 0);
+            request.Birthday, request.PhoneNumber, request.Address, request.Rating);
 
         await _repository.Create(author, cancellationToken);
         

@@ -18,7 +18,7 @@ public class RegisterRequestHandler : IRequestHandler<RegisterRequest>
     {
         if (await _repository.Users.AnyAsync(user => user.Email == request.Email, cancellationToken))
         {
-            throw new ArgumentException($"This email {request.Email} already exist, use another one.");
+            throw new ArgumentException($"Эта почта {request.Email} уже зарегистрирована в системе, используйте другую.");
         }   
 
         var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);

@@ -42,6 +42,7 @@ public class GetBookHandler : IRequestHandler<GetBookRequest, BookModel>
                 LastName = author.User.LastName!,
                 Patronymic = author.User.Patronymic!,
             },
+            Rating = book.Rating,
             Description = book.Description
         };
 

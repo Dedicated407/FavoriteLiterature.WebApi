@@ -7,4 +7,5 @@ public class AddAuthorRequestModel
     public DateTime? Birthday { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Address { get; set; }
+    public byte Rating { get; set; }
 }
