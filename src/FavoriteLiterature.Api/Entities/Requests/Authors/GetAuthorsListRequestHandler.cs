@@ -19,11 +19,16 @@ public class GetAuthorsListRequestHandler : IRequestHandler<GetAuthorsListReques
     {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<User, AuthorModel>());
         var mapper = new Mapper(config);
+        var pattern = $"%{request.Query}%";
         
         var entities = await _repository.Users
             .Where(x => x.Author != null)
             .OrderBy(x => x.LastName)
+            .Where(x => EF.Functions.ILike(x.LastName + x.FirstName + x.Patronymic, pattern))
+            .Skip(request.Skip)
+            .Take(request.Take)
             .ToArrayAsync(cancellationToken);
+        
         
         var result = mapper.Map<List<AuthorModel>>(entities);
         return result;

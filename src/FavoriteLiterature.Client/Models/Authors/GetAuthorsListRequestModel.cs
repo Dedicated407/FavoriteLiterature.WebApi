@@ -1,6 +1,6 @@
 ﻿namespace FavoriteLiterature.Client.Models.Authors;
 
-public class GetAuthorsListRequestModel
+public class GetAuthorsListRequestModel : PaginationModel
 {
     /// <summary>
     /// Фильтрация по названию

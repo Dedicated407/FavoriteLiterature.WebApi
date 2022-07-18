@@ -21,4 +21,6 @@ public class User : BaseEntity
 
     public Critic? Critic { get; set; }
     public Author? Author { get; set; }
+
+    public override string ToString() => LastName + FirstName + Patronymic;
 }
