@@ -2,7 +2,7 @@
 
 public class AddAuthorRequestModel
 {
-    public Guid UserId { get; set; }
+    public Guid AuthorId { get; set; }
     public string? Description { get; set; }
     public DateTimeOffset? Birthday { get; set; }
     public string? PhoneNumber { get; set; }

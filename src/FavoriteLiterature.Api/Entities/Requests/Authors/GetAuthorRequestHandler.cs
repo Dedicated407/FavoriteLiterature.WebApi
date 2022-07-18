@@ -25,6 +25,12 @@ public class GetAuthorRequestHandler : IRequestHandler<GetAuthorRequest, AuthorP
         }
 
         var authorInfo = await _repository.Authors.FirstOrDefaultAsync(x => x.UserId == author.Id, cancellationToken);
+
+        var books = _repository.Books
+            .Where(x => x.AuthorId == authorInfo!.Id)
+            .OrderBy(x => x.Created)
+            .Select(x => x.Name)
+            .ToListAsync(cancellationToken);
         
         return new AuthorProfileModel
         {
@@ -35,6 +41,7 @@ public class GetAuthorRequestHandler : IRequestHandler<GetAuthorRequest, AuthorP
             LastName = author.LastName!,
             Patronymic = author.Patronymic!,
             Description = authorInfo!.Description,
+            BookNames = books.Result,
             Birthday = authorInfo.Birthday,
             PhoneNumber = authorInfo.PhoneNumber,
             Address = authorInfo.Address,

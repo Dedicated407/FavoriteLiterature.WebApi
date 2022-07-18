@@ -24,8 +24,8 @@ public class GetBookHandler : IRequestHandler<GetBookRequest, BookModel>
             throw new ApplicationException($"Book with Id={request.Id} is not found!");
         }
         
-        var author = _repository.Authors.First(x => x.Id == book.AuthorId);
-        var authorInfo = _repository.Users.First(x => x.Id == author.UserId);
+        var author = await _repository.Authors.FirstOrDefaultAsync(x => x.Id == book.AuthorId, cancellationToken);
+        var authorInfo = await _repository.Users.FirstOrDefaultAsync(x => x.Id == author.UserId, cancellationToken: cancellationToken);
         author.User = authorInfo;
         book.Author = author;
 
