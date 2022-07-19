@@ -1,8 +1,8 @@
-using FavoriteLiterature.Client.Models.Books;
+using FavoriteLiterature.Client.Models;
 using MediatR;
 
 namespace FavoriteLiterature.Api.Entities.Requests.Books;
 
-public class GetBooksListRequest : GetBooksListRequestModel, IRequest<List<Book>>
+public class GetBooksListRequest : GetListRequestModel, IRequest<List<Book>>
 {
 }

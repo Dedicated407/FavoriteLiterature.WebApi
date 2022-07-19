@@ -15,12 +15,13 @@ public class GetBooksListRequestHandler : IRequestHandler<GetBooksListRequest, L
     
     public async Task<List<Book>> Handle(GetBooksListRequest request, CancellationToken cancellationToken)
     {
-        var books = _repository.Books;
         var pattern = $"%{request.Query}%";
         
-        var result = await books
-            .Where(x => EF.Functions.ILike(x.Name, pattern))
+        var result = await _repository.Books
             .OrderBy(x => x.Name)
+            .Where(x => EF.Functions.ILike(x.Name, pattern))
+            .Skip(request.Skip)
+            .Take(request.Take)
             .ToListAsync(cancellationToken);
         
         return result;

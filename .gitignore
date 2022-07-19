@@ -36,3 +36,7 @@ _UpgradeReport_Files/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Prometheus & Grafana
+/metrics/prometheus
+/metrics/grafana

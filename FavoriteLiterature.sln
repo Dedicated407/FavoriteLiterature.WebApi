@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FavoriteLiterature.Client",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FavoriteLiterature.Tests", "src\FavoriteLiterature.Tests\FavoriteLiterature.Tests.csproj", "{E43BCE4C-8D62-4136-A65D-F2313D682F5B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "metrics", "metrics", "{8CF4D223-176E-47B4-BC4B-CDBEFC4090E8}"
+	ProjectSection(SolutionItems) = preProject
+		metrics\docker-compose.yml = metrics\docker-compose.yml
+		metrics\prometheus.yml = metrics\prometheus.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

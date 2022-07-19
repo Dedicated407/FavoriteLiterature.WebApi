@@ -10,7 +10,7 @@ public class AddAuthorRequestValidator : AbstractValidator<AddAuthorRequest>
     
     public AddAuthorRequestValidator()
     {
-        RuleFor(x => x.UserId)
+        RuleFor(x => x.AuthorId)
             .NotEmpty();
 
         RuleFor(x => x.PhoneNumber)
@@ -18,7 +18,7 @@ public class AddAuthorRequestValidator : AbstractValidator<AddAuthorRequest>
                 number == null || 
                 Regex.IsMatch(number, "^[\\+]?[0-9]{1,3}[(]?[0-9]{3}[)]?[0-9]{3}[-\\s\\.]?[0-9]{2}[-\\s\\.]?[0-9]{2}$"))
             .WithMessage("Введен некорректный номер телефона, попробуйте номер следующего формата: " +
-                         "\n89999999999\n+79999999999\n+7(999)9999999\n+7(999)999-99-99");
+                         "89999999999, +79999999999, +7(999)9999999, +7(999)999-99-99");
         
         RuleFor(x => x.Rating)
             .Must(x => x is >= MinimumRating and <= MaximumRating)

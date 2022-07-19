@@ -10,7 +10,7 @@ public abstract class BaseEntity
     
     protected BaseEntity()
     {
-        Id = Guid.Empty;
+        Id = Guid.NewGuid();
         Created = DateTimeOffset.UtcNow;
     }
 }

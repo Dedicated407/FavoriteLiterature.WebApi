@@ -1,3 +1,5 @@
+using App.Metrics.Formatters.Prometheus;
+
 namespace FavoriteLiterature.Api;
 
 public static class Program
@@ -10,5 +12,15 @@ public static class Program
     private static IHostBuilder CreateHostBuilder(string[] args) =>
         Host
             .CreateDefaultBuilder(args)
+            .UseMetricsWebTracking(options =>
+            {
+                options.OAuth2TrackingEnabled = true;
+            })
+            .UseMetricsEndpoints(options => // Настройка endpoints
+            {
+                options.MetricsTextEndpointOutputFormatter = new MetricsPrometheusTextOutputFormatter();
+                options.MetricsEndpointOutputFormatter = new MetricsPrometheusProtobufOutputFormatter();
+                options.EnvironmentInfoEndpointEnabled = false;
+            })
             .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 }
