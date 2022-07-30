@@ -124,7 +124,7 @@ public class Startup
         
         services
             .AddDbContext<DataContext>(options => options.UseNpgsql(connectionString))
-            .AddScoped<IRepository, DataContext>()
+            .AddScoped<IRepository, Repository>()
             .Configure<JwtOptions>(_configuration.GetSection(nameof(JwtOptions)).Bind)
             .AddSingleton<IAuthorizationHandler, MinimumRoleRequirementHandler>();
     }
