@@ -33,7 +33,7 @@ In this project I used:
 ### ORM:
  - [Entity Framework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore).
 ### Шифрование:
- - [BCrypt](https://www.nuget.org/packages/BCrypt.Net-Next) (for using Blowfish encryption algorithm).
+ - [BCrypt](https://www.nuget.org/packages/BCrypt.Net-Next) (Библиотека для использования алгоритма шифрования Blowfish).
 ### Для документации API:
  - [Swagger](https://www.nuget.org/packages/Swashbuckle.AspNetCore).
 ### Для мониторинга событий и создания оповещений:
