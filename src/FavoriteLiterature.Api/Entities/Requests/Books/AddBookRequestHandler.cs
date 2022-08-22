@@ -16,7 +16,7 @@ public class AddBookRequestHandler : IRequestHandler<AddBookRequest>
     public async Task<Unit> Handle(AddBookRequest request, CancellationToken cancellationToken)
     {
         User user = await _repository.Users
-            .FirstOrDefaultAsync(user => user.Id == request.UserId, cancellationToken) 
+            .FirstOrDefaultAsync(user => user.Id == request.AuthorId, cancellationToken) 
                     ?? throw new ArgumentException(nameof(user));
         
         Author author = await _repository.Authors
