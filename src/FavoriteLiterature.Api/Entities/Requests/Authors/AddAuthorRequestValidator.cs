@@ -10,7 +10,7 @@ public class AddAuthorRequestValidator : AbstractValidator<AddAuthorRequest>
     
     public AddAuthorRequestValidator()
     {
-        RuleFor(x => x.AuthorId)
+        RuleFor(x => x.UserId)
             .NotEmpty();
 
         RuleFor(x => x.PhoneNumber)
