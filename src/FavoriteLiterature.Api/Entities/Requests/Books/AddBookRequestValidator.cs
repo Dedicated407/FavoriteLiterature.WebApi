@@ -9,7 +9,7 @@ public class AddBookRequestValidator : AbstractValidator<AddBookRequest>
     
     public AddBookRequestValidator()
     {
-        RuleFor(x => x.UserId)
+        RuleFor(x => x.AuthorId)
             .NotEmpty();
         
         RuleFor(x => x.Name)
